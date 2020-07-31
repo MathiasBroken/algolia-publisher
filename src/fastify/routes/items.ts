@@ -7,7 +7,7 @@ module.exports = async function (fastify, opts) {
       return await addItemToAlgolia(request.body);
     } catch (error) {
       console.trace(error);
-      reply.badRequest(error);
+      reply.badRequest(error.message);
     }
   });
 };

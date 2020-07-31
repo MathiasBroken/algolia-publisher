@@ -1,7 +1,8 @@
 import { addItemToAlgolia } from "../services/items";
+import { Schemas } from "../schemas/index";
 
 module.exports = async function (fastify, opts) {
-  fastify.post("/", async function (request, reply) {
+  fastify.post("/", { schema: Schemas.addItemSchema }, async function (request, reply) {
     try {
       reply.code(200);
       return await addItemToAlgolia(request.body);

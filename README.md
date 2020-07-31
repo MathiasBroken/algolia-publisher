@@ -18,8 +18,10 @@ yarn start:dev
 ```
 
 ### Default conf
-``` C
+```sh
 APP_KEY=your_app_key
 API_KEY=your_api_key
 INDEX=your_index
 ```
+### Swagger Doc
+See [Swagger](http://127.0.0.1:3000/static/index.html), you need to run the app to see the documentation

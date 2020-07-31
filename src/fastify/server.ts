@@ -1,6 +1,7 @@
 import Fastify, { FastifyInstance } from "fastify";
 import { join } from "path";
 import AutoLoad from "fastify-autoload";
+import { Algolia } from "./algolia";
 
 export class Server {
   static fastify: FastifyInstance;
@@ -14,6 +15,10 @@ export class Server {
       await this.fastify.register(AutoLoad, {
         dir: join(__dirname, "/plugins"),
       });
+      await this.fastify.register(AutoLoad, {
+        dir: join(__dirname, "/routes"),
+      });
+      await Algolia.connect();
       await this.fastify.listen(3000);
       console.log(`Server listening at port ${3000}`);
     } catch (err) {

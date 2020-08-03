@@ -49,7 +49,7 @@ module.exports = async function (fastify, opts) {
     async function (request, reply) {
       try {
         reply.code(200);
-        await existsItemAlgolia(request.body.objectId);
+        await existsItemAlgolia(request.body.objectID);
         return await updateItemAlgolia(request.body);
       } catch (error) {
         console.trace(error);

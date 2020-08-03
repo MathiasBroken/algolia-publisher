@@ -15,3 +15,7 @@ export async function deleteItemAlgolia(itemId) {
 export async function existsItemAlgolia(itemId) {
   return Algolia.index.getObject(itemId);
 }
+
+export async function exportItemsAlgolia(items) {
+  return Algolia.index.saveObjects(items);
+}

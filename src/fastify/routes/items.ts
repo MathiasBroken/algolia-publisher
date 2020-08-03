@@ -1,6 +1,41 @@
-import { addItemToAlgolia, updateItemAlgolia, deleteItemAlgolia, existsItemAlgolia } from "../services/items";
+import {
+  addItemToAlgolia,
+  updateItemAlgolia,
+  deleteItemAlgolia,
+  existsItemAlgolia,
+  exportItemsAlgolia,
+} from "../services/items";
 
 module.exports = async function (fastify, opts) {
+  fastify.post(
+    "/export",
+    {
+      schema: {
+        tags: ["Items"],
+        summary: "Export items to algolia",
+        body: {
+          type: "array",
+          items: {
+            properties: {
+              objectID: {
+                description: "Id of the item",
+                type: "string",
+              },
+            },
+          },
+        },
+      },
+    },
+    async function (request, reply) {
+      try {
+        reply.code(200);
+        return await exportItemsAlgolia(request.body);
+      } catch (error) {
+        console.trace(error);
+        reply.badRequest(error.message);
+      }
+    }
+  );
   fastify.post(
     "/",
     {

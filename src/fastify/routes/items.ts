@@ -5,26 +5,13 @@ import {
   existsItemAlgolia,
   exportItemsAlgolia,
 } from "../services/items";
+import { Schemas } from "../schemas/index";
 
 module.exports = async function (fastify, opts) {
   fastify.post(
     "/export",
     {
-      schema: {
-        tags: ["Items"],
-        summary: "Export items to algolia",
-        body: {
-          type: "array",
-          items: {
-            properties: {
-              objectID: {
-                description: "Id of the item",
-                type: "string",
-              },
-            },
-          },
-        },
-      },
+      schema: Schemas.exportSchema,
     },
     async function (request, reply) {
       try {
@@ -39,19 +26,7 @@ module.exports = async function (fastify, opts) {
   fastify.post(
     "/",
     {
-      schema: {
-        tags: ["Items"],
-        summary: "Add new item",
-        body: {
-          type: "object",
-          properties: {
-            objectID: {
-              description: "Id of the item",
-              type: "string",
-            },
-          },
-        },
-      },
+      schema: Schemas.addItemSchema,
     },
     async function (request, reply) {
       try {
@@ -67,19 +42,7 @@ module.exports = async function (fastify, opts) {
   fastify.put(
     "/",
     {
-      schema: {
-        tags: ["Items"],
-        summary: "Update item",
-        body: {
-          type: "object",
-          properties: {
-            objectID: {
-              description: "Id of the item",
-              type: "string",
-            },
-          },
-        },
-      },
+      schema: Schemas.updateItemSchema,
     },
     async function (request, reply) {
       try {
@@ -96,15 +59,7 @@ module.exports = async function (fastify, opts) {
   fastify.delete(
     "/:itemId",
     {
-      schema: {
-        tags: ["Items"],
-        summary: "Remove item by itemId",
-        params: {
-          itemId: {
-            description: "item id",
-          },
-        },
-      },
+      schema: Schemas.deleteItemSchema,
     },
     async function (request, reply) {
       try {

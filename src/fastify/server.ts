@@ -19,7 +19,7 @@ export class Server {
         dir: join(__dirname, "/routes"),
       });
       await Algolia.connect();
-      await this.fastify.listen(Number(process.env.PORT) | 3000, "0.0.0.0");
+      await this.fastify.listen(process.env.PORT ? Number(process.env.PORT) : 3000, "0.0.0.0");
       console.log(`Server listening at port ${process.env.PORT}`);
     } catch (err) {
       console.error(err);

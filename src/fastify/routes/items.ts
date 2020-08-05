@@ -16,7 +16,8 @@ module.exports = async function (fastify, opts) {
     async function (request, reply) {
       try {
         reply.code(200);
-        return await exportItemsAlgolia(request.body);
+        await exportItemsAlgolia(request.body);
+        return "OK";
       } catch (error) {
         console.trace(error);
         reply.badRequest(error.message);
